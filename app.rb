@@ -6,14 +6,14 @@ require('./lib/product')
 require('pg')
 
 get('/') do
-  @Products = Product.all()
+  @products = Product.all()
   erb(:index)
 end
 
 post('/products') do
   name = params['name']
-  price = paramas ['price']
+  price = params['price']
   product = Product.create({:name => name, :price => price})
-  @Products = Product.all()
+  @products = Product.all()
   redirect('/')
 end
