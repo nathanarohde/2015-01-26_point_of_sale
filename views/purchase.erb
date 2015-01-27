@@ -1,0 +1,17 @@
+<h3>Purchase Order</h3>
+
+<form action="/purchase_add" method='post'>
+  <label for='customer_name'>Enter Customer Name:</label>
+  <input id='customer_name' name='customer_name' type='text'>
+
+  <% @products.each() do |product| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="product_ids[]" value="<%= product.id() %>"><%= product.name %> | <%= product.price %>
+      </label>
+    </div>
+  <% end %>
+  <button type='submit'>Add purchase order</button>
+</form>
+<br>
+<a href="/">Return to Main Page</a>
