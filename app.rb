@@ -3,6 +3,7 @@ require('sinatra/reloader')
 also_reload('lib/**/*.rb')
 require('sinatra/activerecord')
 require('./lib/product')
+require('./lib/purchase')
 require('pg')
 
 get('/') do
@@ -17,7 +18,7 @@ end
 
 get('/purchases') do
   @products = Product.all()
-  # @purchases = Purchase.all()
+  @purchases = Purchase.all()
   erb(:purchase)
 end
 
@@ -27,6 +28,18 @@ post('/product_add') do
   product = Product.create({:name => name, :price => price})
   @products = Product.all()
   redirect('/products')
+end
+
+post('/purchase_result') do
+  customer_name = params['customer_name']
+  product_ids = params['product_ids']
+  @products_list = []
+  product_ids.each() do |product_id|
+    @products_list.push(Product.find(product_id.to_i()))
+  end
+  @purchase = Purchase.create({})
+  @purchase.products << @products_list
+  erb(:purchase_result)
 end
 
 get('/products/:id/edit') do

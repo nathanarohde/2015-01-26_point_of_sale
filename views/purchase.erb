@@ -1,13 +1,13 @@
 <h3>Purchase Order</h3>
 
-<form action="/purchase_add" method='post'>
+<form action="/purchase_result" method='post'>
   <label for='customer_name'>Enter Customer Name:</label>
   <input id='customer_name' name='customer_name' type='text'>
 
   <% @products.each() do |product| %>
     <div class="checkbox">
       <label>
-        <input type="checkbox" name="product_ids[]" value="<%= product.id() %>"><%= product.name %> | <%= product.price %>
+        <input type="checkbox" name="product_ids[]" value="<%= product.id() %>"> <%= product.name %> | <%= product.price %>
       </label>
     </div>
   <% end %>
